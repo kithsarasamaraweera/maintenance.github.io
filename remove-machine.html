@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Machine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Remove Machine</h2>
+        <form id="removeMachineForm">
+            <input type="text" id="machineName" placeholder="Machine Name" required>
+            <button type="submit">Remove Machine</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('removeMachineForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const machineName = document.getElementById('machineName').value;
+
+            const month = getMonthFromUrl();
+            const machines = JSON.parse(localStorage.getItem('machines')) || {};
+
+            if (machines[month]) {
+                machines[month] = machines[month].filter(machine => machine.name !== machineName);
+                localStorage.setItem('machines', JSON.stringify(machines));
+            }
+
+            alert('Machine removed successfully');
+            window.location.href = 'month.html?month=' + month;
+        });
+
+        function getMonthFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('month');
+        }
+    </script>
+</body>
+
+</html>

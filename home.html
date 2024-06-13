@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="st.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Select a Month</h2>
+        <div class="flex-container">
+            <div class="flex-box" onclick="goToMonth('January')">January</div>
+            <div class="flex-box" onclick="goToMonth('February')">February</div>
+            <div class="flex-box" onclick="goToMonth('March')">March</div>
+            <div class="flex-box" onclick="goToMonth('April')">April</div>
+            <div class="flex-box" onclick="goToMonth('May')">May</div>
+            <div class="flex-box" onclick="goToMonth('June')">June</div>
+            <div class="flex-box" onclick="goToMonth('July')">July</div>
+            <div class="flex-box" onclick="goToMonth('August')">August</div>
+            <div class="flex-box" onclick="goToMonth('September')">September</div>
+            <div class="flex-box" onclick="goToMonth('October')">October</div>
+            <div class="flex-box" onclick="goToMonth('November')">November</div>
+            <div class="flex-box" onclick="goToMonth('December')">December</div>
+        </div>
+    </div>
+    <script>
+        function goToMonth(month) {
+            window.location.href = 'month.html?month=' + month;
+        }
+    </script>
+</body>
+
+
+
+</html>

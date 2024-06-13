@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machines List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2 id="month-title"></h2>
+        <form action="">
+            <input type="text" placeholder="Enter the name of machine">
+            <button type="submit">+</button>
+        </form>
+        <ol id="machine-list">
+            <!-- List of machines will be displayed here -->
+        </ol>
+
+        <div>
+            <button onclick="addMachine()">Add Machine</button>
+            <button onclick="removeMachine()">Remove Machine</button>
+        </div>
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const month = urlParams.get('month');
+            document.getElementById('month-title').innerText = month + ' Maintenance List';
+            loadMachines(month);
+        });
+
+        function addMachine() {
+            window.location.href = 'add-machine.html?month=' + getMonthFromUrl();
+        }
+
+        function removeMachine() {
+            window.location.href = 'remove-machine.html?month=' + getMonthFromUrl();
+        }
+
+        function getMonthFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('month');
+        }
+
+        function loadMachines(month) {
+            const machineList = document.getElementById('machine-list');
+            machineList.innerHTML = '';
+
+            const machines = JSON.parse(localStorage.getItem('machines')) || {};
+            const monthMachines = machines[month] || [];
+
+            monthMachines.forEach(machine => {
+                const li = document.createElement('li');
+                li.textContent = `${machine.name}: ${machine.details}`;
+                li.style.cursor = 'pointer';
+                li.addEventListener('click', function () {
+                    window.location.href = machine.url;
+                });
+                machineList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+
+</html>
